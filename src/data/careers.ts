@@ -13,6 +13,7 @@ export interface Career {
   milestones: { title: string; description: string; duration: string; type: "education" | "skill" | "certification" | "job" }[];
   topCompanies: string[];
   responsibilities: string[];
+  locations: string[];
 }
 
 export const careers: Career[] = [
@@ -45,6 +46,7 @@ export const careers: Career[] = [
     ],
     topCompanies: ["Google", "Microsoft", "Apple", "Meta", "Amazon", "Netflix", "Stripe"],
     responsibilities: ["Write clean, maintainable code", "Design system architecture", "Code reviews and testing", "Collaborate with cross-functional teams", "Debug and resolve technical issues"],
+    locations: ["San Francisco", "New York", "Seattle", "Austin", "Remote"],
   },
   {
     id: "data-scientist",
@@ -75,6 +77,7 @@ export const careers: Career[] = [
     ],
     topCompanies: ["Google", "Meta", "Netflix", "Spotify", "Airbnb", "IBM", "McKinsey"],
     responsibilities: ["Build predictive models", "Analyze large datasets", "Create data visualizations", "Present findings to stakeholders", "Develop ML pipelines"],
+    locations: ["San Francisco", "New York", "Boston", "Chicago", "Remote"],
   },
   {
     id: "ux-designer",
@@ -104,6 +107,7 @@ export const careers: Career[] = [
     ],
     topCompanies: ["Apple", "Google", "Airbnb", "Spotify", "Figma", "Adobe", "Microsoft"],
     responsibilities: ["Conduct user research", "Create wireframes and prototypes", "Run usability tests", "Design interaction patterns", "Build design systems"],
+    locations: ["San Francisco", "New York", "Los Angeles", "London", "Remote"],
   },
   {
     id: "cybersecurity-analyst",
@@ -132,6 +136,7 @@ export const careers: Career[] = [
     ],
     topCompanies: ["CrowdStrike", "Palo Alto Networks", "Deloitte", "IBM", "Cisco", "Google", "NSA"],
     responsibilities: ["Monitor security systems", "Investigate incidents", "Perform vulnerability assessments", "Implement security policies", "Conduct penetration tests"],
+    locations: ["Washington D.C.", "New York", "San Francisco", "Austin", "Remote"],
   },
   {
     id: "product-manager",
@@ -160,6 +165,7 @@ export const careers: Career[] = [
     ],
     topCompanies: ["Google", "Meta", "Amazon", "Stripe", "Shopify", "Salesforce", "Uber"],
     responsibilities: ["Define product vision and strategy", "Prioritize feature backlog", "Analyze user feedback", "Coordinate with engineering and design", "Track KPIs and metrics"],
+    locations: ["San Francisco", "New York", "Seattle", "London", "Remote"],
   },
   {
     id: "cloud-architect",
@@ -189,10 +195,12 @@ export const careers: Career[] = [
     ],
     topCompanies: ["AWS", "Google Cloud", "Microsoft Azure", "Snowflake", "HashiCorp", "Databricks"],
     responsibilities: ["Design cloud architecture", "Manage cloud migrations", "Optimize costs and performance", "Ensure security compliance", "Mentor engineering teams"],
+    locations: ["Seattle", "San Francisco", "New York", "Austin", "Remote"],
   },
 ];
 
 export const categories = [...new Set(careers.map((c) => c.category))];
+export const locations = [...new Set(careers.flatMap((c) => c.locations))].sort();
 
 export const assessmentQuestions = [
   {

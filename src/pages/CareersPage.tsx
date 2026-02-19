@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
 import CareerCard from "@/components/CareerCard";
-import { careers, categories } from "@/data/careers";
+import { careers, categories, locations } from "@/data/careers";
 import { useState } from "react";
+import { MapPin } from "lucide-react";
 
 export default function CareersPage() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const filtered = activeCategory ? careers.filter((c) => c.category === activeCategory) : careers;
+  const [activeLocation, setActiveLocation] = useState<string | null>(null);
+
+  const filtered = careers.filter((c) => {
+    if (activeCategory && c.category !== activeCategory) return false;
+    if (activeLocation && !c.locations.includes(activeLocation)) return false;
+    return true;
+  });
 
   return (
     <div className="py-20">
@@ -19,8 +26,8 @@ export default function CareersPage() {
           </p>
         </motion.div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {/* Category Filters */}
+        <div className="flex flex-wrap justify-center gap-2 mb-4">
           <button
             onClick={() => setActiveCategory(null)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
@@ -38,6 +45,33 @@ export default function CareersPage() {
               }`}
             >
               {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Location Filter */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="flex items-center gap-1 text-muted-foreground mr-1">
+            <MapPin className="w-4 h-4" />
+            <span className="text-sm font-medium">Location:</span>
+          </div>
+          <button
+            onClick={() => setActiveLocation(null)}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              !activeLocation ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground hover:bg-muted"
+            }`}
+          >
+            All
+          </button>
+          {locations.map((loc) => (
+            <button
+              key={loc}
+              onClick={() => setActiveLocation(loc)}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                activeLocation === loc ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground hover:bg-muted"
+              }`}
+            >
+              {loc}
             </button>
           ))}
         </div>
